@@ -73,9 +73,7 @@ export default function Register({ passwordRules }: Props) {
                                         setOrganizationName(value);
 
                                         if (!slugTouched) {
-                                            setOrganizationSlug(
-                                                slugify(value),
-                                            );
+                                            setOrganizationSlug(slugify(value));
                                         }
                                     }}
                                 />
@@ -114,7 +112,9 @@ export default function Register({ passwordRules }: Props) {
                                     Lowercase letters, numbers and hyphens.
                                     We&apos;ll suggest one as you type.
                                 </p>
-                                <InputError message={errors.organization_slug} />
+                                <InputError
+                                    message={errors.organization_slug}
+                                />
                             </div>
                         </section>
 

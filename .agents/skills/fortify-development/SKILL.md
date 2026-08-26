@@ -32,7 +32,6 @@ Enable in `config/fortify.php` features array:
 - `Features::updateProfileInformation()` - Profile updates
 - `Features::updatePasswords()` - Password changes
 - `Features::twoFactorAuthentication()` - 2FA with QR codes and recovery codes
-- `Features::passkeys()` - Passwordless authentication with WebAuthn passkeys
 
 > Use `search-docs` for feature configuration options and customization patterns.
 

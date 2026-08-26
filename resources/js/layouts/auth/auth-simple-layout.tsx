@@ -123,7 +123,7 @@ export default function AuthSimpleLayout({
         <div className="flex min-h-svh bg-background lg:grid lg:h-svh lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
             <aside
                 aria-hidden="true"
-                className="relative hidden min-h-0 select-none overflow-hidden lg:flex lg:h-full lg:flex-col lg:justify-between xl:p-14"
+                className="relative hidden min-h-0 overflow-hidden select-none lg:flex lg:h-full lg:flex-col lg:justify-between xl:p-14"
                 style={{
                     backgroundColor: STAGE_BG,
                     color: 'oklch(0.96 0.01 95)',
@@ -245,8 +245,7 @@ export default function AuthSimpleLayout({
                     </div>
 
                     <p className="mt-10 text-center text-xs text-muted-foreground/70">
-                        Protected by throttled sessions and encrypted
-                        transport.
+                        Protected by throttled sessions and encrypted transport.
                     </p>
                 </div>
             </main>
