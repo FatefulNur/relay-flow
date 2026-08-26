@@ -207,7 +207,7 @@ export default function AuthSimpleLayout({
                     }}
                 />
 
-                <div className="relative z-10 my-auto w-full max-w-sm">
+                <div className="relative z-10 my-auto w-full max-w-md">
                     <div className="mb-8 flex items-center gap-3 lg:hidden">
                         <Link
                             href={home()}
