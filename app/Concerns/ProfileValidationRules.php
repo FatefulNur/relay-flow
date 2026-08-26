@@ -1,7 +1,8 @@
 <?php
-
 namespace App\Concerns;
 
+use App\Enums\UserRole;
+use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Validation\Rule;
@@ -16,8 +17,9 @@ trait ProfileValidationRules
     protected function profileRules(?int $userId = null): array
     {
         return [
-            'name' => $this->nameRules(),
+            'name'  => $this->nameRules(),
             'email' => $this->emailRules($userId),
+            ...$this->organizationRules(),
         ];
     }
 
@@ -46,6 +48,25 @@ trait ProfileValidationRules
             $userId === null
                 ? Rule::unique(User::class)
                 : Rule::unique(User::class)->ignore($userId),
+        ];
+    }
+
+    /**
+     * Get the validation rules used to validate organization data.
+     *
+     * @return array<string, array<ValidationRule|array<mixed>|string>>
+     */
+    protected function organizationRules(): array
+    {
+        return [
+            'organization_name' => ['required', 'string', 'min:3'],
+            'organization_slug' => [
+                'required',
+                'string',
+                'min:3',
+                Rule::unique(Organization::class, 'slug'),
+            ],
+            'role'              => ['nullable', Rule::enum(UserRole::class)],
         ];
     }
 }
