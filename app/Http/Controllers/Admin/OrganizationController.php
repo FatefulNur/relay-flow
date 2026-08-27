@@ -4,18 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
-use App\Services\TenantService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class OrganizationController extends Controller
 {
     public function switch(Request $request, Organization $organization): RedirectResponse
     {
         $request->session()->put(
-            TenantService::getSessionKeyFor($request->user()),
+            tenant()->getSessionKeyFor($request->user()),
             $organization->slug
         );
+
+        Inertia::flash('toast', ['type' => 'success', 'message' => __('Organization switched.')]);
 
         return redirect()->intended(route('dashboard'));
     }

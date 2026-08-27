@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Scopes\TenantScope;
-use App\Services\TenantService;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Override;
@@ -15,7 +14,7 @@ class Model extends BaseModel
     protected static function booted()
     {
         static::creating(function (Model $model) {
-            $model->attributes[TenantService::getKeyName()] = TenantService::getKey();
+            $model->attributes[tenant()->getKeyName()] = tenant()->getKey();
         });
     }
 }

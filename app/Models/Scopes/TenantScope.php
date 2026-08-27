@@ -2,7 +2,6 @@
 
 namespace App\Models\Scopes;
 
-use App\Services\TenantService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
@@ -16,9 +15,9 @@ class TenantScope implements Scope
     {
         $tenantKey = sprintf('%s.%s',
             $model->getTable(),
-            TenantService::getKeyName(),
+            tenant()->getKeyName(),
         );
 
-        $builder->where($tenantKey, TenantService::getKey());
+        $builder->where($tenantKey, tenant()->getKey());
     }
 }

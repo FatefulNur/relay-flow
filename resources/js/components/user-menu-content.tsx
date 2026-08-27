@@ -46,9 +46,9 @@ export function UserMenuContent({ user }: Props) {
                 <>
                     <DropdownMenuGroup>
                         <DropdownMenuSub>
-                            <DropdownMenuSubTrigger className="cursor-pointer">
+                            <DropdownMenuSubTrigger className="cursor-pointer inline-flex gap-2 w-full">
                                 <Building2 className="mr-2 text-muted-foreground" size="16" />
-                                {organization?.name ?? 'Select organization'}
+                                Organizations
                             </DropdownMenuSubTrigger>
                             <DropdownMenuPortal>
                                 <DropdownMenuSubContent>

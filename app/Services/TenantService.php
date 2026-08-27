@@ -9,33 +9,39 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TenantService
 {
-    private static ?Organization $organization = null;
+    public function __construct(
+        private ?Organization $organization = null,
+    ) {
+        $this->set($organization);
+    }
 
-    public static function getKeyName(): string
+    public function getKeyName(): string
     {
         return 'organization_id';
     }
 
-    public static function getKey(): ?string
+    public function getKey(): ?string
     {
-        return self::$organization?->id;
+        return $this->organization?->id;
     }
 
-    public static function set(Organization $organization): void
+    public function set(?Organization $organization = null): self
     {
-        self::$organization = $organization;
+        $this->organization = $organization;
+
+        return $this;
     }
 
-    public static function get(bool $throwOnNull = false): Organization
+    public function get(bool $throwOnNull = false): Organization
     {
-        if (self::$organization === null && $throwOnNull) {
+        if ($this->organization === null && $throwOnNull) {
             throw new UnauthorizedException('Tenant not found', Response::HTTP_UNAUTHORIZED);
         }
 
-        return self::$organization;
+        return $this->organization;
     }
 
-    public static function getSessionKeyFor(User $user): string
+    public function getSessionKeyFor(User $user): string
     {
         return sprintf('user_organization:%s:%s', $user->id, $user->email);
     }

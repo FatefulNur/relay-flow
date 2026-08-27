@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use App\Models\User;
-use App\Services\TenantService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -44,10 +43,10 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
-                'user' => $user->load('organizations'),
+                'user' => $user?->load('organizations'),
             ],
-            'organization' => fn() => TenantService::get(),
-            'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'organization' => fn () => tenant()?->get(),
+            'sidebarOpen'  => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }
 }
