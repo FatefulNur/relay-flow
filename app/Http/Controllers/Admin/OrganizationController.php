@@ -14,7 +14,7 @@ class OrganizationController extends Controller
     {
         $request->session()->put(
             TenantService::getSessionKeyFor($request->user()),
-            encrypt($organization->slug)
+            $organization->slug
         );
 
         return redirect()->intended(route('dashboard'));

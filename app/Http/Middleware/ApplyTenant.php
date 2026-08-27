@@ -27,7 +27,7 @@ class ApplyTenant
         }
 
         if ($organizationSlug = $request->session()->get(TenantService::getSessionKeyFor($user))) {
-            $organization = $user->organizations()->where('slug', decrypt($organizationSlug))->first();
+            $organization = $user->organizations()->where('slug', $organizationSlug)->first();
         }
 
         if (! $organization) {
