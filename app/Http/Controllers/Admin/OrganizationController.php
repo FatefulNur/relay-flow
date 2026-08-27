@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -11,11 +12,11 @@ class OrganizationController extends Controller
 {
     public function switch(Request $request, Organization $organization): RedirectResponse
     {
-            $request->session()->put(
-                TenantService::getSessionKeyFor($request->user()),
-                encrypt($organization->slug)
-            );
+        $request->session()->put(
+            TenantService::getSessionKeyFor($request->user()),
+            encrypt($organization->slug)
+        );
 
-            return redirect()->intended(route('dashboard'));
+        return redirect()->intended(route('dashboard'));
     }
 }

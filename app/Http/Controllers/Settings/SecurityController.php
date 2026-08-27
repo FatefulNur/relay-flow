@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
@@ -19,14 +20,14 @@ class SecurityController extends Controller
     {
         $props = [
             'canManageTwoFactor' => Features::canManageTwoFactorAuthentication(),
-            'canManagePasskeys'  => Features::canManagePasskeys(),
-            'passwordRules'      => Password::defaults()->toPasswordRulesString(),
+            'canManagePasskeys' => Features::canManagePasskeys(),
+            'passwordRules' => Password::defaults()->toPasswordRulesString(),
         ];
 
         if (Features::canManageTwoFactorAuthentication()) {
             $request->ensureStateIsValid();
 
-            $props['twoFactorEnabled']     = $request->user()->hasEnabledTwoFactorAuthentication();
+            $props['twoFactorEnabled'] = $request->user()->hasEnabledTwoFactorAuthentication();
             $props['requiresConfirmation'] = Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm');
         }
 

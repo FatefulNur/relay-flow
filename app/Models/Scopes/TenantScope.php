@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\Scopes;
 
 use App\Services\TenantService;
@@ -13,7 +14,7 @@ class TenantScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        $tenantKey = sprintf("%s.%s",
+        $tenantKey = sprintf('%s.%s',
             $model->getTable(),
             TenantService::getKeyName(),
         );

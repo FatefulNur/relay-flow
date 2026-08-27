@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Actions\Fortify;
 
 use App\Concerns\PasswordValidationRules;
@@ -22,14 +23,14 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         Validator::make($input, [
-             ...$this->profileRules(),
+            ...$this->profileRules(),
             'password' => $this->passwordRules(),
         ])->validate();
 
         return DB::transaction(function () use ($input) {
             $user = User::create([
-                'name'     => $input['name'],
-                'email'    => $input['email'],
+                'name' => $input['name'],
+                'email' => $input['email'],
                 'password' => $input['password'],
             ]);
 

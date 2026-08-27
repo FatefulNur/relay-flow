@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Concerns;
 
 use App\Enums\UserRole;
@@ -17,7 +18,7 @@ trait ProfileValidationRules
     protected function profileRules(?int $userId = null): array
     {
         return [
-            'name'  => $this->nameRules(),
+            'name' => $this->nameRules(),
             'email' => $this->emailRules($userId),
             ...$this->organizationRules(),
         ];
@@ -66,7 +67,7 @@ trait ProfileValidationRules
                 'min:3',
                 Rule::unique(Organization::class, 'slug'),
             ],
-            'role'              => ['nullable', Rule::enum(UserRole::class)],
+            'role' => ['nullable', Rule::enum(UserRole::class)],
         ];
     }
 }
