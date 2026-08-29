@@ -15,28 +15,28 @@ use Inertia\Response;
 class OrganizationController extends Controller
 {
     public function create(): Response
-     {
+    {
         return Inertia::render('organizations/create');
-     }
-    
+    }
+
     public function store(StoreOrganizationRequest $request): RedirectResponse
     {
         $input = $request->validated();
 
         DB::transaction(function () use ($input, $request) {
             $organization = Organization::create([
-                    'name' => $input['organization_name'],
-                    'slug' => $input['organization_slug'],
-                ]);
-    
-                $request->user()->organizations()->attach($organization, [
-                    'role' => UserRole::OWNER->value,
-                ]);
+                'name' => $input['organization_name'],
+                'slug' => $input['organization_slug'],
+            ]);
+
+            $request->user()->organizations()->attach($organization, [
+                'role' => UserRole::OWNER->value,
+            ]);
         });
 
-            Inertia::flash('toast', ['type' => 'success', 'message' => __('Organization created')]);
+        Inertia::flash('toast', ['type' => 'success', 'message' => __('Organization created')]);
 
-            return to_route('dashboard');
+        return to_route('dashboard');
     }
 
     public function switch(Request $request, Organization $organization): RedirectResponse

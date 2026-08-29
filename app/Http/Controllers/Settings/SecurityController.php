@@ -20,8 +20,8 @@ class SecurityController extends Controller
     {
         $props = [
             'canManageTwoFactor' => Features::canManageTwoFactorAuthentication(),
-            'canManagePasskeys' => Features::canManagePasskeys(),
-            'passwordRules' => Password::defaults()->toPasswordRulesString(),
+            'canManagePasskeys'  => Features::canManagePasskeys(),
+            'passwordRules'      => Password::defaults()->toPasswordRulesString(),
         ];
 
         if (Features::canManageTwoFactorAuthentication()) {

@@ -16,12 +16,12 @@ test('registration screen can be rendered', function () {
 
 test('new users can register', function () {
     $response = $this->post(route('register.store'), [
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => 'password',
+        'name'                  => 'Test User',
+        'email'                 => 'test@example.com',
+        'password'              => 'password',
         'password_confirmation' => 'password',
-        'organization_name' => 'Test Org',
-        'organization_slug' => 'test-org',
+        'organization_name'     => 'Test Org',
+        'organization_slug'     => 'test-org',
     ]);
 
     $this->assertAuthenticated();
@@ -38,11 +38,11 @@ test('new users can register', function () {
 
 test('registration requires an organization name', function () {
     $response = $this->from(route('register'))->post(route('register.store'), [
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => 'password',
+        'name'                  => 'Test User',
+        'email'                 => 'test@example.com',
+        'password'              => 'password',
         'password_confirmation' => 'password',
-        'organization_slug' => 'test-org',
+        'organization_slug'     => 'test-org',
     ]);
 
     $response->assertRedirect(route('register'));

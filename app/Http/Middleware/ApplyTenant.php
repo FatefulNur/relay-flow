@@ -38,7 +38,7 @@ class ApplyTenant
 
         abort_if(! $organization, Response::HTTP_UNAUTHORIZED, 'Tenant not found');
 
-        // Avoid organization switching twice in a single request 
+        // Avoid organization switching twice in a single request
         if ($sessionSlug !== $organization->slug) {
             $request->session()->put($sessionKey, $organization->slug);
         }
