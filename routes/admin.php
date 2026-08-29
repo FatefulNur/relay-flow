@@ -27,8 +27,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->middleware('throttle:6,1')
             ->name('user-password.update');
 
-        Route::post('organizations/{organization}/switch', [OrganizationController::class, 'switch'])->name('organizations.switch');
-
         Route::inertia('appearance', 'settings/appearance')->name('appearance.edit');
+
+    });
+
+    Route::prefix('organizations')->name('organizations.')->group(function () {
+        Route::get('create', [OrganizationController::class, 'create'])->name('create');
+        Route::post('/', [OrganizationController::class, 'store'])->name('store');
+        Route::post('{organization}/switch', [OrganizationController::class, 'switch'])->name('switch');
     });
 });

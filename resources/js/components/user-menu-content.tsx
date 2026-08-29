@@ -1,5 +1,5 @@
 import { Link, router, usePage } from '@inertiajs/react';
-import { Building2, Check, LogOut, Settings } from 'lucide-react';
+import { Building2, Check, LogOut, PlusCircle, Settings } from 'lucide-react';
 import {
     DropdownMenuGroup,
     DropdownMenuItem,
@@ -14,7 +14,7 @@ import { UserInfo } from '@/components/user-info';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { logout } from '@/routes';
 import { edit } from '@/routes/profile';
-import organizations from '@/routes/organizations';
+import organizations, { create } from '@/routes/organizations';
 import type { SharedData } from '@/types';
 import type { User } from '@/types';
 
@@ -48,7 +48,8 @@ export function UserMenuContent({ user }: Props) {
                         <DropdownMenuSub>
                             <DropdownMenuSubTrigger className="cursor-pointer inline-flex gap-2 w-full">
                                 <Building2 className="mr-2 text-muted-foreground" size="16" />
-                                Organizations
+
+                                Workspaces
                             </DropdownMenuSubTrigger>
                             <DropdownMenuPortal>
                                 <DropdownMenuSubContent>
@@ -68,6 +69,19 @@ export function UserMenuContent({ user }: Props) {
                                             </Link>
                                         </DropdownMenuItem>
                                     ))}
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem asChild>
+                                        <Link
+                                            className="block w-full cursor-pointer"
+                                            href={create()}
+                                            onClick={cleanup}
+                                            prefetch
+                                        >
+                                            <PlusCircle />
+
+                                            Add New
+                                        </Link>
+                                    </DropdownMenuItem>
                                 </DropdownMenuSubContent>
                             </DropdownMenuPortal>
                         </DropdownMenuSub>
